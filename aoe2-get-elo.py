@@ -8,9 +8,10 @@ def get_elo(player_id, steam_id = True, leaderboard_id = 3):
     if steam_id:
         url += "&steam_id=" + str(player_id)
     else:
-        url += "&player_id=" + str(player_id)
+        url += "&profile_id=" + str(player_id)
 
     req = requests.get(url)
+    
     parsed_json = req.json()
 
     return parsed_json[0]['rating']
@@ -20,9 +21,10 @@ def assoc(url):
         if(ID):
             return ID
         else:
-            return False
+            ID = url.split('-')
+            return(int(ID[1]))
 
 if __name__ == "__main__":
-    ID = assoc("https://steamcommunity.com/id/dekeract/")
-    print(get_elo(ID)) 
+    ID = assoc("https://aoe2.net/#profile-1509347")
+    print(get_elo(ID, steam_id = False)) 
 
