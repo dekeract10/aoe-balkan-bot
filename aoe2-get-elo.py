@@ -1,8 +1,18 @@
+#!/bin/env python3
 import requests
-import json
 
-req = requests.get("https://aoe2.net/api/player/ratinghistory?game=aoe2de&leaderboard_id=3&steam_id=76561199003184910&count=1")
+def get_elo(player_id, steam_id = True, leaderboard_id = 3):
+    url = "https://aoe2.net/api/player/ratinghistory?game=aoe2de&leaderboard_id=" + str(leaderboard_id) + "&count=1"
 
-parsed_json = req.json()
+    if steam_id:
+        url += "&steam_id=" + str(player_id)
+    else:
+        url += "&player_id=" + str(player_id)
 
-print(parsed_json[0]['rating'])
+    req = requests.get(url)
+    parsed_json = req.json()
+
+    print(parsed_json[0]['rating'])
+
+if __name__ == "__main__":
+    get_elo("76561199003184910") 
