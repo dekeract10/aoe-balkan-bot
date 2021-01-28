@@ -1,5 +1,6 @@
 #!/bin/env python3
 import requests
+import steam.steamid
 
 def get_elo(player_id, steam_id = True, leaderboard_id = 3):
     url = "https://aoe2.net/api/player/ratinghistory?game=aoe2de&leaderboard_id=" + str(leaderboard_id) + "&count=1"
@@ -12,7 +13,16 @@ def get_elo(player_id, steam_id = True, leaderboard_id = 3):
     req = requests.get(url)
     parsed_json = req.json()
 
-    print(parsed_json[0]['rating'])
+    return parsed_json[0]['rating']
+
+def assoc(url):
+        ID = steam.steamid.from_url(url, http_timeout=30)
+        if(ID):
+            return ID
+        else:
+            return False
 
 if __name__ == "__main__":
-    get_elo("76561199003184910") 
+    ID = assoc("https://steamcommunity.com/id/dekeract/")
+    print(get_elo(ID)) 
+
