@@ -69,6 +69,6 @@ async def on_message(message):
     #    await message.author.add_roles(test_role[0])
 
 
-client.run("ODA0MjkxNDY4NDQwNTAyMjc0.YBKMzQ.yxCsAIOzsAx39mV3-zt4J2jQ12I")
+client.run("TOKEN")
 
 #client.run(input("Unesi token:"))
