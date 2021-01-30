@@ -2,7 +2,6 @@
 
 import discord
 import getelo
-import re
 
 client = discord.Client()
 
